@@ -1,6 +1,9 @@
 package com.example.PAC_07;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Author {
@@ -11,6 +14,10 @@ public class Author {
 	public int dob;
 	public int qtyBooks;
 	public Boolean alive;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user")
+	private User user;
 	
 	public Author () {}
 
@@ -76,5 +83,13 @@ public class Author {
 
 	public void setAlive(Boolean alive) {
 		this.alive = alive;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

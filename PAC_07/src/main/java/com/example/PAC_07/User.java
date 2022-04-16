@@ -14,7 +14,7 @@ public class User {
 	public int year;
 	
 	//@OneToMany
-	//public Book book;
+	//public Author author;
 
 	public User() {
 	}

@@ -33,16 +33,14 @@ public class ApplicationCommandRunner implements CommandLineRunner {
 		userService.save(user3);
 		userService.save(user4);
 		
-		Author author1 = new Author ();
-		Author Author2 = new Author ();
-		//Book book3 = new Book ("B003", "I LOVE JAVA", "Anna", 2, 2023, "GWR-456" );
+		//private int id; public String name; public String country; public int dob; public int qtyBooks; public Boolean alive;
+		Author author1 = new Author (0001, "Carlos Ruiz-Zafón", "Spain", 9-9-1964, 8, false);
+		Author author2 = new Author (0002, "Arturo Perez-Reverte", "Span", 9-9-1964, 1, true);
 		
 		authorService.save(author1);
 		authorService.save(author2);
-		//bookService.save(book3);
 		
-		//logger.info("count: " + bookService.count());
-		logger.info(bookService.findAll());
+		logger.info(authorService.findAll());
 		
 		
 		logger.info("count: " + userService.count());
@@ -71,21 +69,21 @@ public class ApplicationCommandRunner implements CommandLineRunner {
 		
 		logger.info("count by lastname: " + userService.countByLastname("Gates"));
 
-		book1.setUser(user2);
-		book2.setUser(user2);
-		book3.setUser(user2);
+		author1.setUser(user2);
+		author2.setUser(user2);
+		//book3.setUser(user2);
 		
-		bookService.save(book1);
-		bookService.save(book2);
-		bookService.save(book3);
+		authorService.save(author1);
+		authorService.save(author2);
+		//bookService.save(book3);
 		
-		logger.info("toString book1: " + book1);
-		logger.info("toString book1: " + book1.getTitle());
+		logger.info("toString author1: " + author1);
+		logger.info("toString author1: " + author1.getName());
 		logger.info("toString user2: " + user2);
 		
-		Book book4 = new Book ("B004", "I LOVE Js", "Anna", 2, 2023, "GWR-456" );
-		book4.setUser(user3);
-		bookService.save(book4);
+		Author author3 = new Author (0003, "Miguel Angel", "Spain", 27-6-1964, 1, true);
+		author3.setUser(user3);
+		authorService.save(author3);
 		
 	}
 }

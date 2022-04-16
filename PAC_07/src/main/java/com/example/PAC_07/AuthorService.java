@@ -1,61 +1,99 @@
 package com.example.PAC_07;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorService {
 	
-	static List<Author> authors = new ArrayList<Author>();
-	static {
-		//int id, String name, String country; int dob; int qtyBooks;Boolean alive
-		Author author1 = new Author (0001, "Carlos Ruiz Zafon", "Spain", 25-9-1964, 9, false);
-		Author author2 = new Author (0002, "Arturo Perez-Reverte", "Spain", 25-11-1951, 33, true);
+	@Autowired
+	AuthorRepository authorRepository;
+	
+	public Iterable<Author> findAll() {
 		
-		authors.add(author1);
-		authors.add(author2);
+		//System.out.println ("Books" + books);
+		
+		return authorRepository.findAll();
 	}
 	
-	public List<Author> queryAuthorsFromArray(){
-		System.out.println("Authors" + authors);
-		return authors;
+	public void save(Author author) {
+		
+		authorRepository.save(author);
+		
+		
 	}
 	
-	public Author addAuthorToArray(Author author) {
-		authors.add(author);
-		return author;
-	}
-	
-	public String deleteAuthorFromArray(String name) {
-		int index = findAuthorByName(name);
-		authors.remove(index);
-		return "Book deleted by title";
-	}
-	
-	public String deleteAuthorFromArray(int id) {
-		authors.remove(id);
-		return "Author deleted by id";
-	}
-	
-	int findAuthorByName(String name) {
-		int index = -1;
-		for ( Author authorTemporal  : authors) {
-			if ( authorTemporal.getName().equals(name) ) {	
-				index = authors.indexOf(authorTemporal);
-			}
+	public String findAndDeleteById(String id) {
+
+		String response = "";
+		Optional<Author> authorFound = authorRepository.findById(id);
+
+		if (authorFound.isPresent()) {
+
+			authorRepository.delete(authorFound.get());
+			response += "author deleted";
+		} else {
+
+			response += "author not found";
 		}
-		return index;
+
+		return response;
 	}
-	
-	public Author replaceAuthor(int idAuthor, Author author) {
-		authors.set(idAuthor, author);
-		return author;
+
+	public void deleteById(String id) {
+
+		// String response = "";
+
+		authorRepository.deleteById(id);
+
 	}
-	
-	public Author getAuthorById (int id) {
-		Author author = authors.get(id);
-		return author;
+
+	public String update(String id, Author author) {
+
+		String response = "";
+		Optional<Author> authorFound = authorRepository.findById(id);
+
+		if (authorFound.isPresent()) {
+
+			authorFound.get().setName(author.getName());
+			authorRepository.save(authorFound.get());
+			response += "author updated";
+
+		} else {
+			response += "author not found";
+		}
+
+		return response;
+
+	}
+
+	// other options
+	public long count() {
+
+		long quantity = authorRepository.count();
+
+		return quantity;
+	}
+
+	public boolean existsById(String id) {
+
+		boolean isAuthor = authorRepository.existsById(id);
+
+		return isAuthor;
+	}
+
+	public Long countByLastname(String author) {
+
+		long quantity = authorRepository.countByAuthor(author);
+
+		return quantity;
+	}
+
+	public void deleteByLastname(String author) {
+
+		authorRepository.deleteByAuthor(author);
+
 	}
 }
