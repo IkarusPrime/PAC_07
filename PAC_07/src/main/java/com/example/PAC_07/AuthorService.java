@@ -86,14 +86,14 @@ public class AuthorService {
 
 	public Long countByLastname(String author) {
 
-		long quantity = authorRepository.countByAuthor(author);
+		long quantity = authorRepository.countByName(author);
 
 		return quantity;
 	}
 
 	public void deleteByLastname(String author) {
 
-		authorRepository.deleteByAuthor(author);
+		authorRepository.deleteByName(author);
 
 	}
 }

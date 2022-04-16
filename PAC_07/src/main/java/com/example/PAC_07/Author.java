@@ -2,13 +2,15 @@ package com.example.PAC_07;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Author {
 	
-	private int id;
+	@Id
+	public int id;
 	public String name;
 	public String country;
 	public int dob;

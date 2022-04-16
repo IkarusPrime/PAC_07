@@ -12,8 +12,8 @@ public interface AuthorRepository extends CrudRepository <Author, Integer>{
 
 	boolean existsById(String id);
 
-	long countByAuthor(String author);
+	long countByName(String name);
 
-	void deleteByAuthor(String author);
+	void deleteByName(String name);
 
 }
