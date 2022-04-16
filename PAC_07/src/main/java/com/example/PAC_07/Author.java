@@ -1,5 +1,8 @@
 package com.example.PAC_07;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Author {
 	
 	private int id;
